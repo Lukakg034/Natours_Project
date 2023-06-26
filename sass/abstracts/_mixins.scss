@@ -1,0 +1,63 @@
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*Media query manager
+0-600px - Phone
+600 - 900px - Tablet portrait
+900-1200px - Tablet landscape
+1200 - 1800px - Normal coding view (laptop and desktop styles) - Desktop first
+1800px + - Big screen desktop size
+*/
+
+/* Breakpoint arguments
+  $breakpoint
+  - phone
+  - tab-portrait
+  - tab-landscape
+  - big-desktop
+*/
+// @mixin respond-phone {
+//   @media (max-width: 600px) {
+//   }
+// }
+
+/*
+
+ORDER of mixins: Base + typography > general layout (header and footer)+ grid > page layout > components
+*/
+
+// 1em = 16px
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //37.5em  = 600px
+  }
+  @if $breakpoint == tab-portrait {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    } //56.25em  = 900px
+  }
+  @if $breakpoint == tab-landscape {
+    @media only screen and (max-width: 75em) {
+      @content;
+    } //75em  = 1200px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //112.5em  = 1800px
+  }
+}
